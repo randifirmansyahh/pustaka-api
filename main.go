@@ -46,7 +46,7 @@ func main() {
 	// var book book.Book
 
 	//array
-	var books []book.Book
+	//var books []book.Book
 
 	//first data & just one
 	//debug() for see the query selected
@@ -74,20 +74,34 @@ func main() {
 	// }
 
 	//like
-	err = db.Debug().Where("title LIKE ?", "%j%").Find(&books).Error
+	// err = db.Debug().Where("title LIKE ?", "%j%").Find(&books).Error
 
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("error read books record")
+	// 	fmt.Println("==========================")
+	// }
+
+	// //with loop
+	// for _, b := range books {
+	// 	fmt.Println("Title :", b.Title)
+	// 	fmt.Println("Object :", b)
+	// }
+	//read
+
+	//Update
+	var book book.Book
+
+	err = db.Debug().Where("id", 1).First(&book).Error
+
+	book.Title = "Ganti Judul"
+	err = db.Save(&book).Error
 	if err != nil {
 		fmt.Println("==========================")
-		fmt.Println("error read books record")
+		fmt.Println("error update books record")
 		fmt.Println("==========================")
 	}
-
-	//with loop
-	for _, b := range books {
-		fmt.Println("Title :", b.Title)
-		fmt.Println("Object :", b)
-	}
-	//read
+	//Update
 
 	router := gin.Default()
 
