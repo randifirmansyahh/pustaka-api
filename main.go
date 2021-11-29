@@ -22,22 +22,72 @@ func main() {
 
 	db.AutoMigrate(&book.Book{})
 
-	//create
-	book := book.Book{}
-	book.Title = "judul"
-	book.Price = 1000
-	book.Discount = 2
-	book.Rating = 5
-	book.Description = "deskripsi buku"
+	//TODO BACA DOCUMENTASI GORM UNTUK TAU LEBIH BANYAK QUERY
 
-	err = db.Create(&book).Error
+	//create
+	// book := book.Book{}
+	// book.Title = "judul"
+	// book.Price = 1000
+	// book.Discount = 2
+	// book.Rating = 5
+	// book.Description = "deskripsi buku"
+
+	// err = db.Create(&book).Error
+
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("error creating book record")
+	// 	fmt.Println("==========================")
+	// }
+	//create
+
+	//read
+	//one class/struct
+	// var book book.Book
+
+	//array
+	var books []book.Book
+
+	//first data & just one
+	//debug() for see the query selected
+	// err = db.Debug().First(&book).Error
+
+	//by id
+	//err = db.Debug().First(&book, 1).Error
+
+	//all data
+	// err = db.Debug().Find(&books).Error
+
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("error read books record")
+	// 	fmt.Println("==========================")
+	// }
+
+	//where
+	// err = db.Debug().Where("price", 1000).Find(&books).Error
+
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("error read books record")
+	// 	fmt.Println("==========================")
+	// }
+
+	//like
+	err = db.Debug().Where("title LIKE ?", "%j%").Find(&books).Error
 
 	if err != nil {
 		fmt.Println("==========================")
-		fmt.Println("error creating book record")
+		fmt.Println("error read books record")
 		fmt.Println("==========================")
 	}
-	//create
+
+	//with loop
+	for _, b := range books {
+		fmt.Println("Title :", b.Title)
+		fmt.Println("Object :", b)
+	}
+	//read
 
 	router := gin.Default()
 
