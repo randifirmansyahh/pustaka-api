@@ -89,19 +89,39 @@ func main() {
 	// }
 	//read
 
-	//Update
+	// //Update
+	// var book book.Book
+
+	// err = db.Debug().Where("id", 1).First(&book).Error
+
+	// book.Title = "Ganti Judul"
+	// err = db.Save(&book).Error
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("error update books record")
+	// 	fmt.Println("==========================")
+	// }
+	// //Update
+
+	//Delete
 	var book book.Book
 
 	err = db.Debug().Where("id", 1).First(&book).Error
 
-	book.Title = "Ganti Judul"
-	err = db.Save(&book).Error
 	if err != nil {
 		fmt.Println("==========================")
-		fmt.Println("error update books record")
+		fmt.Println("error find books record")
 		fmt.Println("==========================")
 	}
-	//Update
+
+	err = db.Delete(&book).Error
+
+	if err != nil {
+		fmt.Println("==========================")
+		fmt.Println("error Delete books record")
+		fmt.Println("==========================")
+	}
+	//Delete
 
 	router := gin.Default()
 
