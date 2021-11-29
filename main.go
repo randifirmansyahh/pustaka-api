@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"pustaka-golang/book"
 	"pustaka-golang/handler"
@@ -20,6 +21,23 @@ func main() {
 	}
 
 	db.AutoMigrate(&book.Book{})
+
+	//create
+	book := book.Book{}
+	book.Title = "judul"
+	book.Price = 1000
+	book.Discount = 2
+	book.Rating = 5
+	book.Description = "deskripsi buku"
+
+	err = db.Create(&book).Error
+
+	if err != nil {
+		fmt.Println("==========================")
+		fmt.Println("error creating book record")
+		fmt.Println("==========================")
+	}
+	//create
 
 	router := gin.Default()
 
