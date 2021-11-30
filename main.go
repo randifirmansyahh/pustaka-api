@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"pustaka-golang/book"
 	"pustaka-golang/handler"
@@ -22,7 +21,32 @@ func main() {
 
 	db.AutoMigrate(&book.Book{})
 
+	//TODO Repository
+	bookRepository := book.NewRepository(db)
+
+	// //TODO FindAll
+	// books, err := bookRepository.FindAll()
+
+	// for _, book := range books {
+	// 	fmt.Println("Title:", book.Title)
+	// }
+
+	//TODO FindByID
+	// book, err := bookRepository.FindByID(2)
+	// fmt.Println("Title:", book.Title)
+
 	//TODO BACA DOCUMENTASI GORM UNTUK TAU LEBIH BANYAK QUERY
+
+	//TODO Create
+	book := book.Book{
+		Title:       "judul",
+		Price:       3000,
+		Description: "Good book",
+		Discount:    1,
+		Rating:      4,
+	}
+
+	bookRepository.Create(book)
 
 	//create
 	// book := book.Book{}
@@ -104,23 +128,23 @@ func main() {
 	// //Update
 
 	//Delete
-	var book book.Book
+	// var book book.Book
 
-	err = db.Debug().Where("id", 1).First(&book).Error
+	// err = db.Debug().Where("id", 1).First(&book).Error
 
-	if err != nil {
-		fmt.Println("==========================")
-		fmt.Println("error find books record")
-		fmt.Println("==========================")
-	}
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("error find books record")
+	// 	fmt.Println("==========================")
+	// }
 
-	err = db.Delete(&book).Error
+	// err = db.Delete(&book).Error
 
-	if err != nil {
-		fmt.Println("==========================")
-		fmt.Println("error Delete books record")
-		fmt.Println("==========================")
-	}
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("error Delete books record")
+	// 	fmt.Println("==========================")
+	// }
 	//Delete
 
 	router := gin.Default()
